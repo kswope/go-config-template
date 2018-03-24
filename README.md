@@ -30,10 +30,6 @@ directory
 └── main.go
 ```
 
-### Change import paths
-
-Don't forget to change the import paths in config.go and data.go to match your own package.
-
 ### Setup all data in data.go
 
 Edit the main struct for all your data
