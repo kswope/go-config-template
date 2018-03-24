@@ -32,18 +32,16 @@ func Setup() {
 	// first merge in defaults
 	merge(&Data, defaultData)
 
-	mode, ok := os.LookupEnv("GO_ENV")
+	mode := os.Getenv("GO_ENV")
 
 	// merge in env specific configs
-	if ok {
-		switch mode {
-		case "dev", "": // "" means default is dev
-			merge(&Data, devData)
-		case "test":
-			merge(&Data, testData)
-		case "prod":
-			merge(&Data, prodData)
-		}
+	switch mode {
+	case "dev", "": // "" means default is dev
+		merge(&Data, devData)
+	case "test":
+		merge(&Data, testData)
+	case "prod":
+		merge(&Data, prodData)
 	}
 
 	// try to overwrite from env variables
