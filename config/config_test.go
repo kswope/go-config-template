@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kswope/viper-experiment/config"
+	"github.com/kswope/go-config-template/config"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -12,42 +12,53 @@ import (
 
 func Test(t *testing.T) {
 
-	Convey("dev", t, func() {
+	Convey("GO_ENV doesn't exist", t, func() {
+
+		os.Unsetenv("GO_ENV")
+		config.Setup()
+
+		Convey("defaults are working", func() {
+			So(config.Data.Port, ShouldEqual, "default-port")
+			So(config.Data.Host, ShouldEqual, "default-host")
+		})
+
+	})
+
+	Convey("GO_ENV=dev", t, func() {
 
 		os.Setenv("GO_ENV", "dev")
 		config.Setup()
 
-		Convey("some defaults", func() {
-			So(config.Data.Port, ShouldEqual, "300")
-			So(config.Data.Host, ShouldEqual, "localhost")
+		Convey("defaults are working", func() {
+			So(config.Data.Port, ShouldEqual, "default-port")
+			So(config.Data.Host, ShouldEqual, "default-host")
 		})
 
-		Convey("data", func() {
-			So(config.Data.DbName, ShouldEqual, "wheatt_dev")
+		Convey("mode data is populating", func() {
+			So(config.Data.DbName, ShouldEqual, "site_dev")
 		})
 
 	})
 
-	Convey("test", t, func() {
+	Convey("GO_ENV=test", t, func() {
 
 		os.Setenv("GO_ENV", "test")
 		config.Setup()
 
-		Convey("some defaults", func() {
-			So(config.Data.Port, ShouldEqual, "300")
-			So(config.Data.Host, ShouldEqual, "localhost")
+		Convey("defaults are working", func() {
+			So(config.Data.Port, ShouldEqual, "default-port")
+			So(config.Data.Host, ShouldEqual, "default-host")
 		})
 
-		Convey("data", func() {
-			Print(config.Data)
-			So(config.Data.DbName, ShouldEqual, "wheatt_test")
+		Convey("mode data is populating", func() {
+			So(config.Data.DbName, ShouldEqual, "site_test")
 		})
 
 	})
 
-	Convey("dealing with env variable", t, func() {
+	Convey("ENV variables work", t, func() {
 
-		os.Setenv("GO_ENV", "test")
+		os.Setenv("GO_ENV", "prod")
 		config.Setup()
 
 		originalDbName := config.Data.DbName
@@ -59,6 +70,7 @@ func Test(t *testing.T) {
 			config.Data.Port = originalPort
 		}()
 
+		// override with env variables
 		os.Setenv("DB_NAME", "bogus_database_name")
 		os.Setenv("PORT", "5555")
 		config.Setup()

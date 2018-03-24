@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/kswope/viper-experiment/config"
+	"github.com/kswope/go-config-template/config"
 )
 
 func main() {
 
 	config.Setup()
-	fmt.Println(config.Data)
+	fmt.Printf("%+v", config.Data)
 
 }

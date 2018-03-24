@@ -17,21 +17,21 @@ type config struct {
 
 // defaults inherited by all other modes below
 var defaultData = config{
-	Host: "localhost",
-	Port: "300",
+	Host: "default-host",
+	Port: "default-port",
 }
 
 // dev ( default mode, or activate using GO_ENV=dev )
 var devData = config{
-	DbName: "wheatt_dev",
+	DbName: "site_dev",
 }
 
 // test ( set using GO_ENV=test )
 var testData = config{
-	DbName: "wheatt_test",
+	DbName: "site_test",
 }
 
 // test ( set using GO_ENV=prod )
 var prodData = config{
-	DbName: "wheatt_prod",
+	DbName: "site_prod",
 }
