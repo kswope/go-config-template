@@ -8,7 +8,6 @@ import (
 
 func main() {
 
-	config.Setup()
 	fmt.Printf("%+v", config.Data)
 
 }

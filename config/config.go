@@ -9,6 +9,12 @@ import (
 	"github.com/imdario/mergo"
 )
 
+// initialization code is in Setup() rather than init() so we can run it
+// manually for testing purposes.
+func init() {
+	Setup()
+}
+
 // Data this is where you get your data
 var Data config
 
