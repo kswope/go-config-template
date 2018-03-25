@@ -16,6 +16,7 @@ type config struct {
 // NOTE: PORT in ENV will overwrite Port
 
 // defaults inherited by all other modes below
+// NOTE: keep stuff outta here you don't want accidentally in production, it could happen!
 var defaultData = config{
 	Host: "default-host",
 	Port: "default-port",
