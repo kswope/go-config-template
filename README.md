@@ -45,7 +45,8 @@ type config struct {
 }
 ```
 
-Edit default data
+#### Edit default data
+NOTE: keep stuff outta here you don't want accidentally in production, it could happen!
 ```
 var defaultData = config{
   Host: "localhost",
@@ -54,7 +55,7 @@ var defaultData = config{
 
 ```
 
-Create structs for the modes
+#### Create structs for the modes
 ```
 var devData = config{
   DbName: "site_dev",
@@ -69,7 +70,7 @@ var prodData = config{
 }
 ```
 
-Load and use
+#### Load and use
 ```
 func main() {
 
@@ -81,7 +82,7 @@ func main() {
 
 ```
 
-Put this amazing package to use
+#### Put this amazing package to use
 ```
 GO_ENV=prod go run main.go
 ```
