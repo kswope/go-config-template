@@ -74,7 +74,6 @@ var prodData = config{
 ```
 func main() {
 
-  config.Setup()
   fmt.Println(config.Data.DbName)
 
 }
